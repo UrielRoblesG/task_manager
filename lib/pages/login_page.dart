@@ -1,12 +1,11 @@
-import 'dart:developer';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:task_manager/blocs/auth/auth_bloc.dart';
 import 'package:task_manager/pages/pages.dart';
 import 'package:task_manager/providers/providers.dart';
+import 'package:task_manager/ui/app_colors.dart';
+import 'package:task_manager/ui/text_styles.dart';
 import 'package:task_manager/utils/route_navigate.dart';
 import 'package:task_manager/widgets/widgets.dart';
 
@@ -143,8 +142,8 @@ class _LoginButton extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
           borderRadius: br,
-          gradient: const LinearGradient(
-              colors: [Color(0xFF63d67a), Color(0xFFb9f0c5)])),
+          gradient: LinearGradient(
+              colors: [AppColors.strongGreen(), AppColors.lightGreen()])),
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.transparent,
@@ -152,17 +151,10 @@ class _LoginButton extends StatelessWidget {
               shape: RoundedRectangleBorder(borderRadius: br)),
           onPressed: onPressed,
           child: (!isLoading)
-              ? const Row(
+              ? Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'Login',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 25,
-                        color: Colors.black,
-                      ),
-                    ),
+                    Text('Login', style: TextStyles.buttonStyle(fontSize: 25)),
                     Icon(
                       Icons.arrow_forward_rounded,
                       color: Colors.black,

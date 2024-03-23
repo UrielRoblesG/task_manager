@@ -3,6 +3,7 @@ import 'package:task_manager/blocs/auth/auth_bloc.dart';
 import 'package:task_manager/pages/pages.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manager/services/services.dart';
+import 'package:task_manager/ui/app_colors.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +22,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<AuthBloc>().add(OnAppStarted());
     return MaterialApp(
+      theme: ThemeData(
+          floatingActionButtonTheme: FloatingActionButtonThemeData(
+              backgroundColor: AppColors.strongGreen())),
       debugShowCheckedModeBanner: false,
       title: 'TaskManager',
       home: BlocConsumer<AuthBloc, AuthState>(

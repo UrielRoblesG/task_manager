@@ -1,3 +1,7 @@
+export 'package:task_manager/widgets/loading_indicator.dart';
+
+export 'package:task_manager/widgets/task_action_sheet.dart';
+
 export 'package:task_manager/widgets/task_filters.dart';
 
 export 'package:task_manager/widgets/auth_background.dart';
