@@ -1,3 +1,5 @@
+export 'package:task_manager/widgets/task_filters.dart';
+
 export 'package:task_manager/widgets/auth_background.dart';
 
 export 'package:task_manager/widgets/input_field.dart';

@@ -19,7 +19,7 @@ class AuthService {
     try {
       final token = prefs.getString('token');
 
-      return token == null ? token : null;
+      return token != null ? token : null;
     } catch (e) {
       log(e.toString());
       return null;
