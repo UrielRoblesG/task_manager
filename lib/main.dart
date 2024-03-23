@@ -1,21 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/blocs/auth/auth_bloc.dart';
+import 'package:task_manager/pages/pages.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_manager/services/services.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final authService = AuthService();
+  await authService.initialize();
+  runApp(BlocProvider(
+    create: (context) => AuthBloc(authService: authService),
+    child: const MyApp(),
+  ));
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    context.read<AuthBloc>().add(OnAppStarted());
     return MaterialApp(
-      title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
+      debugShowCheckedModeBanner: false,
+      title: 'TaskManager',
+      home: BlocConsumer<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state.status == AuthStatus.error) {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(state.msg ?? '')));
+          }
+        },
+        builder: (context, state) {
+          if (state.status == AuthStatus.success) {
+            return HomePage();
+          }
+
+          return LoginPage();
+        },
       ),
     );
   }
