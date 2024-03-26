@@ -10,15 +10,20 @@ class TextStyles {
   static TextStyle cardTitle(
           {FontWeight fontWeight = FontWeight.w500,
           double fontSize = 25,
-          TextOverflow overflow = TextOverflow.ellipsis}) =>
+          TextOverflow overflow = TextOverflow.clip}) =>
       TextStyle(
-          fontWeight: fontWeight, fontSize: fontSize, color: Colors.black);
+          fontWeight: fontWeight,
+          fontSize: fontSize,
+          color: Colors.black,
+          overflow: overflow);
   static TextStyle cardDescription(
           {FontWeight fontWeight = FontWeight.w400,
           double fontSize = 18,
           TextOverflow overflow = TextOverflow.ellipsis}) =>
       TextStyle(
-          fontWeight: fontWeight,
-          fontSize: fontSize,
-          color: Colors.grey.shade700);
+        fontWeight: fontWeight,
+        fontSize: fontSize,
+        overflow: overflow,
+        color: Colors.grey.shade700,
+      );
 }

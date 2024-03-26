@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_manager/blocs/task_crud/task_crud_bloc.dart';
 import 'package:task_manager/models/models.dart';
 import 'package:task_manager/ui/text_styles.dart';
 
@@ -7,51 +9,70 @@ class TaskCard extends StatelessWidget {
   final EdgeInsetsGeometry margin;
   final EdgeInsetsGeometry padding;
   final BorderRadiusGeometry? borderRadius;
+  final VoidCallback? onTap;
 
   TaskCard(
       {super.key,
       required this.task,
+      this.onTap,
       this.margin = const EdgeInsets.symmetric(vertical: 10),
       this.padding = const EdgeInsets.symmetric(vertical: 4),
       this.borderRadius});
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: margin,
-      padding: padding,
-      decoration:
-          _decoration(borderRadius: borderRadius ?? BorderRadius.circular(20)),
-      width: double.infinity,
-      height: 150,
-      child: Stack(
-        children: [
-          Positioned(
-              right: 0,
+    final crudBloc = context.read<TaskCrudBloc>();
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: margin,
+        padding: padding,
+        decoration: _decoration(
+            borderRadius: borderRadius ?? BorderRadius.circular(20)),
+        width: double.infinity,
+        height: 150,
+        child: Stack(
+          children: [
+            Positioned(
+              right: 5,
+              top: 2,
               child: GestureDetector(
-                onTapDown: (details) async {
-                  final opt = await _showPopupMenu(context, details);
+                  onTapDown: (details) async {
+                    final opt = await _showPopupMenu(context, details);
 
-                  if (opt == null) {
-                    return;
-                  }
-                },
-                child: IconButton(
-                    onPressed: () {}, icon: Icon(Icons.more_vert_rounded)),
-              )),
-          Column(
-            children: [
-              _Header(title: task.title),
-              _Description(
-                description: task.description,
-              )
-            ],
-          ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: _TaskStatus(status: task.isCompleted),
-          )
-        ],
+                    if (opt == null) {
+                      return;
+                    }
+
+                    switch (opt) {
+                      case 0:
+                        crudBloc.add(OnViewTask(id: task.id!));
+                        break;
+                      case 1:
+                        crudBloc.add(OnEditTask(task.id!));
+                        break;
+                      case 2:
+                        crudBloc.add(OnDeleteTask(task));
+                        break;
+                      default:
+                    }
+                  },
+                  child: const Icon(Icons.more_vert_rounded)),
+            ),
+            Column(
+              children: [
+                _Header(title: task.title ?? ''),
+                _Description(
+                  description: task.getFormatedDate(),
+                )
+              ],
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: _TaskStatus(status: task.isCompleted),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -64,10 +85,12 @@ class TaskCard extends StatelessWidget {
             details.globalPosition.dy,
             details.globalPosition.dx,
             details.globalPosition.dy),
-        items: [
-          PopupMenuItem(child: const Text('Ver'), value: 0),
-          PopupMenuItem(child: const Text('Actualizar'), value: 1),
-          PopupMenuItem(child: const Text('Eliminar'), value: 2),
+        items: const [
+          PopupMenuItem(value: 0, child: Text('Ver')),
+          PopupMenuItem(value: 1, child: Text('Editar')),
+          PopupMenuItem(
+              value: 2,
+              child: Text('Eliminar', style: TextStyle(color: Colors.red))),
         ],
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20))));
@@ -98,9 +121,9 @@ class _Description extends StatelessWidget {
         width: constraints.maxWidth,
         height: 30,
         margin: const EdgeInsets.symmetric(horizontal: 8),
-        child: (description != null)
+        child: (description?.isNotEmpty == true)
             ? Text(
-                description ?? '',
+                'Fecha de vencimiento: ${description ?? ''}',
                 style: TextStyles.cardDescription(),
               )
             : const SizedBox(),

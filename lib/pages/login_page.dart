@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:task_manager/blocs/auth/auth_bloc.dart';
-import 'package:task_manager/pages/pages.dart';
 import 'package:task_manager/providers/providers.dart';
 import 'package:task_manager/ui/app_colors.dart';
 import 'package:task_manager/ui/text_styles.dart';
-import 'package:task_manager/utils/route_navigate.dart';
 import 'package:task_manager/widgets/widgets.dart';
 
+// Pantalla de login
+// El login no es funcional, pero si es necesario ingresar un usuario
+// y contraseña
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -17,33 +18,25 @@ class LoginPage extends StatelessWidget {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state.status == AuthStatus.success) {
-            Navigator.pushReplacement(
-                context, RouteNavigate.createRoute(HomePage()));
-          }
-        },
-        child: Scaffold(
-            body: AuthBackground(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: size.height * 0.3),
-                const _LoginHeader(),
-                FormContainer(
-                    height: size.height * .4,
-                    width: size.width,
-                    child: ChangeNotifierProvider(
-                      create: (context) => LoginFormProvider(),
-                      child: const _LoginForm(),
-                    )),
-              ],
-            ),
+      child: Scaffold(
+          body: AuthBackground(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: size.height * 0.3),
+              const _LoginHeader(),
+              FormContainer(
+                  height: size.height * .4,
+                  width: size.width,
+                  child: ChangeNotifierProvider(
+                    create: (context) => LoginFormProvider(),
+                    child: const _LoginForm(),
+                  )),
+            ],
           ),
-        )),
-      ),
+        ),
+      )),
     );
   }
 }
@@ -66,6 +59,9 @@ class _LoginHeader extends StatelessWidget {
   }
 }
 
+// Crea el formulario de login
+// valida que los campos tengan algun valor
+// cualquiera
 class _LoginForm extends StatelessWidget {
   const _LoginForm({super.key});
 
@@ -127,6 +123,8 @@ class _LoginForm extends StatelessWidget {
   }
 }
 
+// Boton para lanzar la accion de login
+// es un evento simulado
 class _LoginButton extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
   final VoidCallback? onPressed;

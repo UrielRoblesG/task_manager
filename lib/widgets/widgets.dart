@@ -1,6 +1,10 @@
-export 'package:task_manager/widgets/loading_indicator.dart';
+export 'package:task_manager/widgets/custom_btn.dart';
 
-export 'package:task_manager/widgets/task_action_sheet.dart';
+export 'package:task_manager/widgets/home_fab.dart';
+
+export 'package:task_manager/widgets/task_crud_container.dart';
+
+export 'package:task_manager/widgets/loading_indicator.dart';
 
 export 'package:task_manager/widgets/task_filters.dart';
 

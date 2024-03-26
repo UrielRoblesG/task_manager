@@ -43,5 +43,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(state.copyWith(status: AuthStatus.success, token: token));
   }
 
-  FutureOr<void> _onLoggedOut(OnLoggedOut event, Emitter<AuthState> emit) {}
+  FutureOr<void> _onLoggedOut(
+      OnLoggedOut event, Emitter<AuthState> emit) async {
+    await authService.logout();
+
+    emit(state.copyWith(status: AuthStatus.initial));
+  }
 }
