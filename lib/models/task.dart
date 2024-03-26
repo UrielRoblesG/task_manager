@@ -1,9 +1,12 @@
 import 'dart:convert';
 
+// Metodo que genera una Tarea a partir de un JSON
 Task taskFromJson(String str) => Task.fromJson(json.decode(str));
 
+// Transforma una tarea a Json
 String taskToJson(Task data) => json.encode(data.toJson());
 
+// Clase para modelar una tarea
 class Task {
   int? id;
   String? title;
@@ -24,6 +27,9 @@ class Task {
       this.token,
       this.tags});
 
+  /**
+   * Metodo para generar una nueva tarea en base a otro atributo 
+   */
   Task copyWith(
           {int? id,
           String? title,
@@ -43,6 +49,9 @@ class Task {
           description: description ?? this.description,
           tags: tags ?? this.tags);
 
+  /**
+   * Metodo factory para crear una tarea a partir de un map
+   */
   factory Task.fromJson(Map<String, dynamic> json) => Task(
       id: json["id"],
       title: json["title"],
@@ -53,6 +62,9 @@ class Task {
       tags: json["tags"],
       token: json["token"]);
 
+  /**
+   * Metodo para convertir una clase en un Json 
+   */
   Map<String, dynamic> toJson() => {
         "id": id,
         "title": title,
@@ -66,6 +78,9 @@ class Task {
         "token": (token == null) ? '' : ''
       };
 
+  /**
+   * Metodo para convertir la fecha en un formato yyyy-mm-dd
+   */
   String? getFormatedDate() => (dueDate != null)
       ? "${dueDate?.year.toString().padLeft(4, '0')}-${dueDate?.month.toString().padLeft(2, '0')}-${dueDate?.day.toString().padLeft(2, '0')}"
       : '';

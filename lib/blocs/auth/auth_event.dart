@@ -1,5 +1,6 @@
 part of 'auth_bloc.dart';
 
+// Eventos del gestor de estados
 sealed class AuthEvent extends Equatable {
   const AuthEvent();
 }

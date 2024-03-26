@@ -4,6 +4,7 @@ sealed class FiltersEvent extends Equatable {
   const FiltersEvent();
 }
 
+// Evento para cambiar el filtro de seleccion
 class OnSelectionChanged extends FiltersEvent {
   final int choice;
 

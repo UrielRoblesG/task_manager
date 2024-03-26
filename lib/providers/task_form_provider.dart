@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/models/models.dart';
 
+/**
+ * Clase para manejar el estado del formulario 
+ * de CRUD
+ */
 class TaskFormProvider extends ChangeNotifier {
   Task _task = Task();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -47,5 +51,6 @@ class TaskFormProvider extends ChangeNotifier {
       : null;
   Task get task => _task;
 
+  // Si el formulario es valido
   bool isValidForm() => formKey.currentState?.validate() ?? false;
 }

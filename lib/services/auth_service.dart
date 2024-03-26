@@ -2,6 +2,10 @@ import 'dart:developer';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+/**
+ * Servicio para realizar las peticiones
+ * al server simula la autenticacion
+ */
 class AuthService {
   late SharedPreferences prefs;
 
@@ -15,6 +19,10 @@ class AuthService {
     }
   }
 
+  /** 
+   * De existir algun token guardado en el dispositivo 
+   * lo obtiene caso contrario regresa null
+   */
   Future<String?> hasToken() async {
     try {
       final token = prefs.getString('token');
@@ -26,6 +34,11 @@ class AuthService {
     }
   }
 
+  /**
+   * Simula una peticion al server del login
+   * Solo guarda el token en la memoria del dispositivo
+   * Regresa el token
+   */
   Future<String?> loggin() async {
     try {
       final token =

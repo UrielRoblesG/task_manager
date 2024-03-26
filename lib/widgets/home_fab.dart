@@ -4,11 +4,20 @@ import 'package:provider/provider.dart';
 import 'package:task_manager/blocs/task_crud/task_crud_bloc.dart';
 import 'package:task_manager/providers/providers.dart';
 
+/**
+ * Componente que muestra un FloatingActionButton
+ * customizado.
+ * Tambien genera varios FloatingActionButton dependiendo
+ * de lo que el estado necesite 
+ */
 class HomeFab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TaskCrudBloc, TaskCrudState>(
       builder: (context, state) {
+        /**
+         * Dependiendo del estado muestro los botones necesarios
+         */
         switch (state.status) {
           case TaskCrudStatus.initial:
             return const _InitialFab();

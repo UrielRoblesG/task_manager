@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/**
+ * Clase para generar una animacion al navegar entre pantallas
+ * TODO: No se porque nunca lo utilice 
+ */
 class RouteNavigate {
   static Route createRoute(Widget page) {
     return PageRouteBuilder(

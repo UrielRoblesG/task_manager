@@ -6,6 +6,9 @@ import 'package:task_manager/models/task.dart';
 import 'package:task_manager/widgets/task_card.dart';
 import 'package:task_manager/widgets/widgets.dart';
 
+/**
+ * Componente que muestra una lista de las tareas 
+ */
 class TaskListView extends StatefulWidget {
   @override
   State<TaskListView> createState() => _TaskListViewState();
@@ -14,6 +17,7 @@ class TaskListView extends StatefulWidget {
 class _TaskListViewState extends State<TaskListView> {
   @override
   void initState() {
+    // Llama al metodo para obtener todas las tareas
     context.read<TaskViewBloc>().add(OnGetAll());
     super.initState();
   }
@@ -28,6 +32,7 @@ class _TaskListViewState extends State<TaskListView> {
         }
       },
       child: BlocBuilder<TaskViewBloc, TaskViewState>(
+        // Dependiendo del estado muestra la lista de tareas correspondiente
         builder: (context, state) {
           if (state.status == TaskListStatus.loading) {
             return LoadingIndicator();
@@ -46,6 +51,9 @@ class _TaskListViewState extends State<TaskListView> {
   }
 }
 
+/**
+ * Componente body de la app
+ */
 class _TaskListBody extends StatelessWidget {
   final List<Task> tasks;
   final EdgeInsetsGeometry padding;
@@ -66,6 +74,8 @@ class _TaskListBody extends StatelessWidget {
           itemBuilder: (context, i) => TaskCard(
               task: tasks[i],
               onTap: () {
+                // Al pulsar sobre una tarjeta de tarea
+                // Llama al metodo para abrir la tarjeta
                 crudBloc.add(OnViewTask(id: tasks[i].id!));
               }),
         ),

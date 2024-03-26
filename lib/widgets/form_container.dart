@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/**
+ * Componente que solo es una caja para mantener un formulario
+ */
 class FormContainer extends StatelessWidget {
   final double height;
   final double width;

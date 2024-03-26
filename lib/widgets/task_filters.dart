@@ -5,6 +5,9 @@ import 'package:task_manager/models/models.dart';
 import 'package:task_manager/ui/app_colors.dart';
 import 'package:task_manager/ui/text_styles.dart';
 
+/**
+ * Componente chip para los botones de los filtros
+ */
 class TaskFilters extends StatelessWidget {
   const TaskFilters({super.key});
   @override

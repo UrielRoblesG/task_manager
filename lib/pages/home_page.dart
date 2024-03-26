@@ -10,6 +10,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
+          // Oculta el teclado del dispositivo al pulsar en una parte
+          // de la pantalla
           FocusScope.of(context).unfocus();
         },
         child: ChangeNotifierProvider(
@@ -24,12 +26,14 @@ class HomePage extends StatelessWidget {
                 actions: [
                   IconButton(
                       onPressed: () {
+                        // Llama a evento para simular logout
                         final bloc =
                             context.read<AuthBloc>().add(OnLoggedOut());
                       },
                       icon: const Icon(Icons.exit_to_app_rounded))
                 ],
               ),
+              // Body principal de la app
               body: Column(
                 children: [TaskFilters(), TaskListView()],
               ),

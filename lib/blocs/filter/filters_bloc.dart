@@ -6,6 +6,8 @@ import 'package:task_manager/models/filter.dart';
 
 part 'filters_event.dart';
 
+// Gestor de estados para seleccionar visualizar las tareas en base al estatus
+// de cada una
 class FiltersBloc extends Bloc<FiltersEvent, int> {
   final List<Filter> filters = [
     Filter(id: 0, name: 'Todos'),
@@ -16,9 +18,11 @@ class FiltersBloc extends Bloc<FiltersEvent, int> {
     on<FiltersEvent>((event, emit) {
       // TODO: implement event handler
     });
+    // Handlers de los eventos
     on<OnSelectionChanged>(_onSelectionChanged);
   }
 
+  // Emite un nuevo evento
   FutureOr<void> _onSelectionChanged(
       OnSelectionChanged event, Emitter<int> emit) {
     emit(event.choice);

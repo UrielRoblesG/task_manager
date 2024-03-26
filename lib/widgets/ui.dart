@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/**
+ * Componente que genera un contenedor en forma de 
+ * Peanut para diseño de la pantalla de login
+ */
 class PeanutContainer extends StatelessWidget {
   final double height;
   final double width;
@@ -22,6 +26,7 @@ class PeanutContainer extends StatelessWidget {
   }
 }
 
+// CustomPainter para PeanutContainer
 class _PeanutPainter extends CustomPainter {
   final Color color;
 
@@ -54,6 +59,11 @@ class _PeanutPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
+/**
+ * Componente que genera un contenedor en forma de 
+ * MedioCirculo para diseño de la pantalla de login
+ * Error en el nombre, pero se entiende
+ */
 class CircleContainer extends StatelessWidget {
   final double height;
   final double width;
@@ -77,6 +87,7 @@ class CircleContainer extends StatelessWidget {
   }
 }
 
+// CustomPainter del medio ciruclo
 class _CirclePainter extends CustomPainter {
   final Color color;
 

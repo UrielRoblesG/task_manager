@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/ui/app_colors.dart';
 
+/**
+ * Componente que genera el boton con el estilo de la app
+ * Recibe un Widget child obligatorio
+ * Recibe una funcion vacia onPressed obligatoria
+ */
 class CustomBtn extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
   final VoidCallback onPressed;

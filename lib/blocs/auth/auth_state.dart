@@ -1,5 +1,6 @@
 part of 'auth_bloc.dart';
 
+// Enum que indica el estatus del gestor de estado
 enum AuthStatus { initial, loading, success, error }
 
 class AuthState extends Equatable {
@@ -9,12 +10,14 @@ class AuthState extends Equatable {
 
   const AuthState({required this.status, this.msg, this.token});
 
+  // metodo que genera un nuevo estado a
   AuthState copyWith({AuthStatus? status, String? token, String? msg}) =>
       AuthState(
           status: status ?? this.status,
           token: token ?? this.token,
           msg: msg ?? this.msg);
 
+  // Ayuda a poder hacer coomparaciones mas profundos
   @override
   List<Object?> get props => [token, status, msg];
 }

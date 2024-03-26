@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/**
+ * Clase para manejar el estado del formulario de login
+ * Sirve para validar
+ */
 class LoginFormProvider extends ChangeNotifier {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String _username = '';

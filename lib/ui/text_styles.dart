@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/**
+ * Clase con algunos estilos 
+ * para los textos de la aplicación
+ */
 class TextStyles {
   static TextStyle buttonStyle(
           {FontWeight fontWeight = FontWeight.w400,

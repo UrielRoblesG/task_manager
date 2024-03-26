@@ -7,6 +7,10 @@ import 'package:task_manager/providers/providers.dart';
 import 'package:task_manager/ui/app_colors.dart';
 import 'package:task_manager/widgets/widgets.dart';
 
+/**
+ * Componente que genera el contenedor del formulario de 
+ * CRUD
+ */
 class TaskCrudContainer extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
   const TaskCrudContainer(
@@ -18,21 +22,27 @@ class TaskCrudContainer extends StatelessWidget {
     return BlocBuilder<TaskCrudBloc, TaskCrudState>(
       builder: (context, state) {
         Widget? child;
+        // Dependiendo del evento muestra el formulario correspondiente
+        // Todos son iguales solo cambian el comportamiento
         switch (state.status) {
+          // Muestra un componenete de Carga
           case TaskCrudStatus.loading:
             child = const SizedBox(
                 width: double.infinity,
                 height: 100,
                 child: Center(child: CircularProgressIndicator()));
             break;
+          // Muestra el formulario de creacion
           case TaskCrudStatus.create:
             child = _CreateForm();
             break;
+          // Muestra el formulario de solo lectura
           case TaskCrudStatus.view:
             child = _ViewForm(
               task: state.task!,
             );
             break;
+          // Muestra el formulario de actualizacion
           case TaskCrudStatus.update:
             final provider =
                 Provider.of<TaskFormProvider>(context, listen: false);
@@ -59,6 +69,10 @@ class TaskCrudContainer extends StatelessWidget {
   }
 }
 
+/**
+ * Componente de formulario de solo lectura
+ * 
+ */
 class _ViewForm extends StatelessWidget {
   final Task task;
   const _ViewForm({super.key, required this.task});

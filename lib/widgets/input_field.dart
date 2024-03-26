@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/**
+ * Componente que genera un TextField.
+ * Muy customizable, 
+ */
 class InputField extends StatelessWidget {
   final IconData? icon;
   final bool? obscureText;

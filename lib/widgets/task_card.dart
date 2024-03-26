@@ -4,6 +4,10 @@ import 'package:task_manager/blocs/task_crud/task_crud_bloc.dart';
 import 'package:task_manager/models/models.dart';
 import 'package:task_manager/ui/text_styles.dart';
 
+/** 
+ * Componente que genera una tarjeta para mostrar las tareas
+ * Todos los parametros son opcionales 
+ */
 class TaskCard extends StatelessWidget {
   final Task task;
   final EdgeInsetsGeometry margin;
@@ -37,6 +41,7 @@ class TaskCard extends StatelessWidget {
               top: 2,
               child: GestureDetector(
                   onTapDown: (details) async {
+                    // Muestra un menu de opciones en la tarjeta
                     final opt = await _showPopupMenu(context, details);
 
                     if (opt == null) {
@@ -45,12 +50,15 @@ class TaskCard extends StatelessWidget {
 
                     switch (opt) {
                       case 0:
+                        // LLama al evento para ver una tarea
                         crudBloc.add(OnViewTask(id: task.id!));
                         break;
                       case 1:
+                        // Llama al evento para editar una tarea
                         crudBloc.add(OnEditTask(task.id!));
                         break;
                       case 2:
+                        // Llama al evento para eliminar una tarea
                         crudBloc.add(OnDeleteTask(task));
                         break;
                       default:
@@ -60,12 +68,15 @@ class TaskCard extends StatelessWidget {
             ),
             Column(
               children: [
+                // Genera el titulo de una tarea
                 _Header(title: task.title ?? ''),
+                // Genera la fecha de vencimiento de la tarea
                 _Description(
                   description: task.getFormatedDate(),
                 )
               ],
             ),
+            // Muestra el estatus de la tarea
             Positioned(
               bottom: 0,
               right: 0,
@@ -77,6 +88,7 @@ class TaskCard extends StatelessWidget {
     );
   }
 
+  // Metodo que muestra un menu de opciones para las tareas
   Future<dynamic> _showPopupMenu(BuildContext context, TapDownDetails details) {
     return showMenu(
         context: context,
@@ -96,6 +108,9 @@ class TaskCard extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(20))));
   }
 
+  /**
+   * Decoracion de la tarjeta
+   */
   BoxDecoration _decoration({BorderRadiusGeometry? borderRadius}) =>
       BoxDecoration(
           borderRadius: borderRadius,
@@ -110,6 +125,9 @@ class TaskCard extends StatelessWidget {
           ]);
 }
 
+/** Componente que genera el texto de fecha de vencimiento
+ * TODO: No se porque se llama _Descripcion
+ */
 class _Description extends StatelessWidget {
   final String? description;
   const _Description({super.key, this.description});
@@ -132,6 +150,9 @@ class _Description extends StatelessWidget {
   }
 }
 
+/**
+ * Dependiendo del estatus de la tarea muestra un mensaje correspondiente
+ */
 class _TaskStatus extends StatelessWidget {
   const _TaskStatus({
     super.key,
@@ -149,6 +170,9 @@ class _TaskStatus extends StatelessWidget {
   }
 }
 
+/** Componente que genera el texto de TITULO de la tarea
+ * TODO: No se porque se llama _Descripcion
+ */
 class _Header extends StatelessWidget {
   final String title;
 
