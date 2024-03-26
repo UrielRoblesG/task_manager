@@ -1,16 +1,12 @@
 # task_manager
 
-A new Flutter project.
+Reto para una entrevista de trabajo Nextline
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Login
+La pantalla de login solo es ilustrativa aunque si valida que los campos de texto tengan
+algun valor.
+#### Cualquier valor.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Es necesario tener internet para utilizar la app 
